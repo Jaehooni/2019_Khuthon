@@ -51,7 +51,7 @@ image1 = Image('./Image/button.jpg',(200,200),(0,0)) #image0을 screenblit하면
 image2 = Image('./Image/button.jpg',(200,300),(0,0)) #image0.image가 출력가능한것
 
 scenelist = [[],[],[]] #내부의리스트는 하나의 게임씬(0번 씬,1번 씬...)
-scenelist[0].append(image0) #먼저 image0을 0번씬에 출력함
+scenelist[0].append(image0) #먼저 image0을 0번씬에 추가함
 scenelist[1].append(image1)
 scenelist[2].append(image2)
 
