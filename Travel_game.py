@@ -2,7 +2,27 @@ import pygame as pg
 import time
 import random
 import datetime
-import sys
+
+"""
+class button:
+    place = " "
+    place_list = [main,[travel_1,travel_2],[work_1,work_2,work_3],mini_game,status]
+    image_link = " "
+    def __init__(_self_):
+        place = place_list[0]
+        image_link = './Image/money_button.jpg'
+
+    def __init__(_self_,_place,_image_link):
+        place = _place
+        image_link = _image_link
+
+    def getPlace():
+        return place
+
+    def getImagelink():
+        return image_link
+"""
+
 
 #class travel
 
@@ -11,6 +31,7 @@ import sys
 #class work
 
 #class 
+
 
 #--------------------------------게임 사전 설정-----------------------------------#
 pg.init()
@@ -28,10 +49,9 @@ money_Add = 100
 Screen = 0 # screen이 0, 1 ,2 ,3 ,4 ,5 일때 다른 화면 설정
 
 while True:
-    while (Screen == 0):
+    if (Screen == 0):
         screen.fill(white)
         #----------------------------실시간 시간 출력---------------------------------#
-
         date = (datetime.datetime.now()).strftime("%Y / %m / %d / %H : %M : %S")
         realtime_Font = pg.font.Font(None, 25)
         realtime_Text = realtime_Font.render("Time : " + date,True,black,white)
@@ -57,27 +77,9 @@ while True:
         screen.blit(money_Text,money_Textrect)
 
   
-        #----------------------------이벤트 발생 코드---------------------------------#
-        for event in pg.event.get():
-            
-            if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
-                pos = pg.mouse.get_pos()
-                if money_b.collidepoint(pos):
-                    money += money_Add
-
-                if travel_b.collidepoint(pos):  ### 화면 전환 이런식으로 하면 어떰
-                    Screen = 1
-
-            if event.type == pg.QUIT:
-                pg.quit()
-                quit()
-
-        #-----------------------------화면 구현 코드----------------------------------#
-        pg.display.update()
-        clock.tick(FPS)
 
 
-    while (Screen == 1):
+    if (Screen == 1):
         screen.fill(black)
         #----------------------------실시간 시간 출력---------------------------------#
 
@@ -106,21 +108,21 @@ while True:
         screen.blit(money_Text,money_Textrect)
 
   
-        #----------------------------이벤트 발생 코드---------------------------------#
-        for event in pg.event.get():
-            
-            if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
-                pos = pg.mouse.get_pos()
-                if money_b.collidepoint(pos):
-                    money += money_Add
+    #----------------------------이벤트 발생 코드---------------------------------#
+    for event in pg.event.get():
+        
+        if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
+            pos = pg.mouse.get_pos()
+            if money_b.collidepoint(pos):
+                money += money_Add
 
-                if travel_b.collidepoint(pos):  ### 화면 전환 이런식으로 하면 어떰
-                    Screen = 0
+            if travel_b.collidepoint(pos):  ### 화면 전환 이런식으로 하면 어떰
+                Screen ^= 1
 
-            if event.type == pg.QUIT:
-                pg.quit()
-                quit()
+        if event.type == pg.QUIT:
+            pg.quit()
+            quit()
 
-        #-----------------------------화면 구현 코드----------------------------------#
-        pg.display.update()
-        clock.tick(FPS)
+    #-----------------------------화면 구현 코드----------------------------------#
+    pg.display.update()
+    clock.tick(FPS)
