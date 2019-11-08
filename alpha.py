@@ -155,7 +155,9 @@ def day_pass():
         player.stamina = 100
         fade_in_and_out()
         pg.event.clear()
-        
+def money_clear():
+    if player.money >= player.maxmoney:
+        player.money = player.maxmoney       
 
 def money_decline(player,decline): #돈없으면 업글못해
     if player.money < decline:
@@ -259,8 +261,9 @@ while True:
         if event.type == pg.QUIT:
             pg.quit()
             quit()
-    
-    day_pass()
+
+    money_clear() #최대보유량 넘으면 자름
+    day_pass() #
 
     #test용
     realtime_Font = pg.font.Font(None, 25)
