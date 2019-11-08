@@ -25,8 +25,123 @@ pg.display.set_caption("가제 : 방구석 여ㅡ행")
 clock = pg.time.Clock()
 money = 0
 money_Add = 100
+
 font = "./Font/bmjua.ttf"
 
+class Image(pg.sprite.Sprite): #rect는 sprite객체만 가능해서 만듦
+    def __init__(self,fileroute,size,rect): #size랑 rect는 튜플
+        pg.sprite.Sprite.__init__(self)
+        self.image = pg.image.load(fileroute) #객체의 이미지를 설정함
+        if size != -1:
+            self.image = (pg.transform.scale(self.image,size)).convert_alpha()
+        self.Rect = self.image.get_rect(topleft=rect)
+
+
+
+###변경점 ----
+
+pin_image = pg.transform.scale(pg.image.load('./Image/Pin.png'),(25,25)).convert_alpha()
+
+national_list = ["japan", "taipei", "singapore", "russia", "austrailia", "turkey", "italy", "switzerland","south_pole", "moon", "andromeda"]
+korean_name = ["이시국", "대만", "싱가포르", "러시아", "호주", "터키", "이탈리아", "스위스", "남극", "달나라", "안드로메다"]
+national_pos = [(461,216),(438,249),(382,325),(319,137),(501,427),(130,192),(80,189),(45,162),(256,552),(630,160),(610,280)]
+national_pos = list(map(lambda x : (x[0]+38, x[1]+12), national_pos))
+national_cost = [8000,20000,40000,80000,150000,300000,800000,2000000,5000000,20000000,50000000]
+national_max_money = [20000,40000,80000,150000,300000,800000,2000000,5000000,20000000,50000000]
+national_select = [0 for i in range(11)]
+national_clear = [0 for i in range(11)]
+
+
+outer_image = [0 for i in range(2)]
+national_button = [0 for i in range(11)]
+
+
+Map = pg.image.load('./Image/TravelMap.png')
+Map = (pg.transform.scale(Map,(800,600))).convert_alpha()
+
+space_pos = (550,80)
+Space = pg.image.load('./Image/Space1.png')
+Space = (pg.transform.scale(Space,(300,400))).convert_alpha()
+
+Moon_pos = (660,185)
+Moon = pg.image.load('./Image/Moon.png')
+outer_image[0] = (pg.transform.scale(Moon,(130,100))).convert_alpha()
+
+Andromeda_pos = (650,255)
+Andromeda = pg.image.load('./Image/Galaxy.png')
+outer_image[1] = (pg.transform.scale(Andromeda,(150,130))).convert_alpha()
+
+def make_travel_button(pos, cost, name, clear):
+    x,y = pos
+    go_travel = "여행하기" if not clear else "여행완료"
+    travel_cost = "비용 : {}원".format(cost)
+    go_travel_font = pg.font.Font(font, 25)
+    
+    gotravel_Text = go_travel_font.render(go_travel,True,black,white)
+    gotravel_Textrect = gotravel_Text.get_rect()
+    gotravel_Textrect.center = (x + 30, y)
+    
+    
+    travel_cost_font = pg.font.Font(font, 25)
+    travelcost_Text = travel_cost_font.render(travel_cost,True,black,white)
+    travelcost_Textrect = travelcost_Text.get_rect()
+    travelcost_Textrect.center = (x + 30, y - 30)
+    
+    name_Text = go_travel_font.render(name,True,black,white)
+    name_Textrect = name_Text.get_rect()
+    name_Textrect.center = (x + 30, y-60)
+    
+    button = screen.blit(gotravel_Text, gotravel_Textrect)
+    screen.blit(travelcost_Text, travelcost_Textrect)
+    screen.blit(name_Text, name_Textrect)
+
+    return button
+
+def travel(currentscene):
+    lst = []
+    national_name = national_list[currentscene-20]
+
+    if currentscene != 20:
+        lst.append(Image('./Image/Travel_Images/travel1.png',(600,300),(215,100)))
+        lst.append(Image('./Image/Travel_Images/travel2.png',(600,300),(415,100)))
+
+    for i in range(2):
+        lst.append(Image('./Image/Travel_Images/{}{}.png'.format(national_name, i+1),(600,300),(0,100)))
+    return lst
+
+
+def processing_bar(currentscene):
+    
+    lt = (100,480)
+    wh = (600,25)
+    percent = 0
+
+    background = Image("./Image/background.jpg",-1,(0,0))
+
+    toggle = 0
+
+    image_list = travel(currentscene)
+    while percent<100:
+        screen.blit(background.image, background.Rect)
+        screen.blit(image_list[toggle].image, image_list[toggle].Rect)
+        if currentscene != 20:
+            screen.blit(image_list[toggle+2].image, image_list[toggle+2].Rect)
+        
+        if 0 <= percent%20 <= 0.1:
+            toggle ^= 1
+            
+        percent = percent%100+0.5
+        
+        r = pg.Rect((100,530), (wh[0]/100*percent, 25))
+        pg.draw.rect(screen,(0,0,0),r)
+        
+        pg.display.update()
+        pg.time.wait(20)
+    pg.event.clear()
+
+###------------
+
+travel_button = None
 
 while True:
     screen.fill(white)
@@ -64,111 +179,18 @@ while True:
    # textrect.center =(100,100)
    # screen.blit(text,textrect)
 
-    national_list = ["japan", "taipei", "singapore", "russia", "austrailia", "turkey", "italy", "switzerland","south_pole", "andromeda", "andromeda"]
-
-
-    Map = pg.image.load('./Image/TravelMap.png')
-    Map = (pg.transform.scale(Map,(800,600))).convert_alpha()
     Map_blit = screen.blit(Map,(-75,0))
-
-    space_pos = (550,80)
-    space_x = 550
-    space_y = 80
-    Space = pg.image.load('./Image/Space1.png')
-    Space = (pg.transform.scale(Space,(300,400))).convert_alpha()
     Space_blit = screen.blit(Space,space_pos)
+    national_button[9] = screen.blit(outer_image[0],national_pos[9])
+    national_button[10] = screen.blit(outer_image[1],national_pos[10])
 
-    Moon_pos = (660,185)
-    Moon_x = 660
-    Moon_y = 185
-    Moon = pg.image.load('./Image/Moon.png')
-    Moon = (pg.transform.scale(Moon,(130,100))).convert_alpha()
-    Moon_blit = screen.blit(Moon,Moon_pos)
+    for i in range(9):
+        national_button[i] = screen.blit(pin_image,national_pos[i])
 
-    Andromeda_pos = (650,255)
-    Andromeda_x = 650
-    Andromeda_y = 255
-    Andromeda = pg.image.load('./Image/Galaxy.png')
-    Andromeda = (pg.transform.scale(Andromeda,(170,185))).convert_alpha()
-    Andromeda_blit = screen.blit(Andromeda,Andromeda_pos)
-
-    Japan_pos = (461,216)
-    Japan_x = 461
-    Japan_y = 216
-    Japan = pg.image.load('./Image/Pin.png')
-    Japan = (pg.transform.scale((Japan),(100,50))).convert_alpha()
-    Japan_blit = screen.blit(Japan,Japan_pos)
-
-    Taiwan_pos = (438,249)
-    Taiwan_x = 438
-    Taiwan_y = 249
-    Taiwan = pg.image.load('./Image/Pin.png')
-    Taiwan = (pg.transform.scale((Taiwan),(100,50))).convert_alpha()
-    Taiwan_blit= screen.blit(Taiwan,Taiwan_pos)
-
-    Singapore_pos = (382,325)
-    Singapore_x = 382
-    Singapore_y = 325
-    Singapore = pg.image.load('./Image/Pin.png')
-    Singapore = (pg.transform.scale((Singapore),(100,50))).convert_alpha()
-    Singapore_blit = screen.blit(Singapore,Singapore_pos)
-
-    Russia_pos = (319,137)
-    Russia_x = 319
-    Russia_y = 137
-    Russia = pg.image.load('./Image/Pin.png')
-    Russia = (pg.transform.scale((Russia),(100,50))).convert_alpha()
-    Russia_blit = screen.blit(Russia,Russia_pos)
-
-    Austrailia_pos = (501,427)
-    Austarailia_x = 501
-    Austrailia_y = 427
-    Austrailia = pg.image.load('./Image/Pin.png')
-    Austrailia = (pg.transform.scale(Austrailia,(100,50))).convert_alpha()
-    Austrailia_blit = screen.blit(Austrailia,Austrailia_pos)
-
-    Turkey_pos = (130,192)
-    Turkey_x = 130
-    Turkey_y = 192
-    Turkey = pg.image.load('./Image/Pin.png')
-    Turkey = (pg.transform.scale(Turkey,(100,50))).convert_alpha()
-    Turkey_blit = screen.blit(Turkey,Turkey_pos)
-
-    Italy_pos = (80,189)
-    Italy_x = 80
-    Italy_y = 189
-    Italy = pg.image.load('./Image/Pin.png')
-    Italy = (pg.transform.scale(Italy,(100,50))).convert_alpha()
-    Italy_blit = screen.blit(Italy,Italy_pos)
-
-    Switzerland_pos = (45,162)
-    Switzerland_x = 45
-    Switzerland_y = 162
-    Switzerland = pg.image.load('./Image/Pin.png')
-    Switzerland = (pg.transform.scale(Italy,(100,50))).convert_alpha()
-    Switzerland_blit = screen.blit(Switzerland,Switzerland_pos)
-
-    South_pole_pos = (256,552)
-    South_pole_x = 256
-    South_pole_y = 552
-    South_Pole = pg.image.load('./Image/Pin.png')
-    South_Pole = (pg.transform.scale(South_Pole,(100,50))).convert_alpha()
-    South_Pole_blit = screen.blit(South_Pole,South_pole_pos)
-
-    def make_travel_button(x, y, cost = 0):
-      go_travel = "여행하기"
-      travel_cost = "비용 : {}원".format(cost)
-      go_travel_font = pg.font.Font(font, 25)
-      gotravel_Text = go_travel_font.render(go_travel,True,black,white)
-      gotravel_Textrect = gotravel_Text.get_rect()
-      gotravel_Textrect.center = (x + 30,216)
-      screen.blit(gotravel_Text, gotravel_Textrect)
-      travel_cost_font = pg.font.Font(font, 25)
-      travelcost_Text = travel_cost_font.render(travel_cost,True,black,white)
-      travelcost_Textrect = travelcost_Text.get_rect()
-      travelcost_Textrect.center = (x + 30, y - 30)
-      screen.blit(travelcost_Text, travelcost_Textrect)
     
+    for i in range(11):
+        if national_select[i]:
+            travel_button = make_travel_button(national_pos[i], national_cost[i], korean_name[i], national_clear[i])
 
   
 
@@ -176,138 +198,25 @@ while True:
     #----------------------------이벤트 발생 코드---------------------------------#
     for event in pg.event.get():
         
-      ##  if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
-       ##     pos = pg.mouse.get_pos()
-       ##     if b.collidepoint(pos):
-       ##         money += money_Add
       if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
         pos = pg.mouse.get_pos()
-        if Japan_blit.collidepoint(pos):
-          go_travel = "여행하기"
-          travel_cost = "비용 : 5000원"
-          go_travel_font = pg.font.Font(font, 25)
-          gotravel_Text = go_travel_font.render(go_travel,True,black,white)
-          gotravel_Textrect = gotravel_Text.get_rect()
-          gotravel_Textrect.center = (Japan_x + 30,216)
-          screen.blit(gotravel_Text, gotravel_Textrect)
-          travel_cost_font = pg.font.Font(font, 25)
-          travelcost_Text = travel_cost_font.render(travel_cost,True,black,white)
-          travelcost_Textrect = travelcost_Text.get_rect()
-          travelcost_Textrect.center = (Japan_x + 30, Japan_y - 30)
-          screen.blit(travelcost_Text, travelcost_Textrect)
 
-        if Taiwan_blit.collidepoint(pos):
-          go_travel = "여행하기"
-          travel_cost = "비용 : 5000원"
-          go_travel_font = pg.font.Font(font, 25)
-          gotravel_Text = go_travel_font.render(go_travel,True,black,white)
-          gotravel_Textrect = gotravel_Text.get_rect()
-          gotravel_Textrect.center = (Japan_x + 30,216)
-          screen.blit(gotravel_Text, gotravel_Textrect)
-          travel_cost_font = pg.font.Font(font, 25)
-          travelcost_Text = travel_cost_font.render(travel_cost,True,black,white)
-          travelcost_Textrect = travelcost_Text.get_rect()
-          travelcost_Textrect.center = (Japan_x + 30, Japan_y - 30)
-          screen.blit(travelcost_Text, travelcost_Textrect)
+        if travel_button != None and travel_button.collidepoint(pos) and not national_clear[national_count]:
+            national_cost[national_count]#필요한 비용
+            ##비용확인 후 시도하기
+            national_clear[national_count] = 1
+            processing_bar(national_count+20)
+            player.maxmoney = national_max_money[national_count]
 
-        if Singapore_blit.collidepoint(pos):
-          go_travel = "여행하기"
-          travel_cost = "비용 : 5000원"
-          go_travel_font = pg.font.Font(font, 25)
-          gotravel_Text = go_travel_font.render(go_travel,True,black,white)
-          gotravel_Textrect = gotravel_Text.get_rect()
-          gotravel_Textrect.center = (Japan_x + 30,216)
-          screen.blit(gotravel_Text, gotravel_Textrect)
-          travel_cost_font = pg.font.Font(font, 25)
-          travelcost_Text = travel_cost_font.render(travel_cost,True,black,white)
-          travelcost_Textrect = travelcost_Text.get_rect()
-          travelcost_Textrect.center = (Japan_x + 30, Japan_y - 30)
-          screen.blit(travelcost_Text, travelcost_Textrect)
+        for i in range(11):
+            if national_button[i].collidepoint(pos):
+                national_select = [0 for i in range(11)]
+                national_select[i] = 1
+                national_count = i
 
-        if Russia_blit.collidepoint(pos):
-          go_travel = "여행하기"
-          travel_cost = "비용 : 5000원"
-          go_travel_font = pg.font.Font(font, 25)
-          gotravel_Text = go_travel_font.render(go_travel,True,black,white)
-          gotravel_Textrect = gotravel_Text.get_rect()
-          gotravel_Textrect.center = (Japan_x + 30,216)
-          screen.blit(gotravel_Text, gotravel_Textrect)
-          travel_cost_font = pg.font.Font(font, 25)
-          travelcost_Text = travel_cost_font.render(travel_cost,True,black,white)
-          travelcost_Textrect = travelcost_Text.get_rect()
-          travelcost_Textrect.center = (Japan_x + 30, Japan_y - 30)
-          screen.blit(travelcost_Text, travelcost_Textrect)
+        
+                
 
-        if Austrailia_blit.collidepoint(pos):
-          go_travel = "여행하기"
-          travel_cost = "비용 : 5000원"
-          go_travel_font = pg.font.Font(font, 25)
-          gotravel_Text = go_travel_font.render(go_travel,True,black,white)
-          gotravel_Textrect = gotravel_Text.get_rect()
-          gotravel_Textrect.center = (Japan_x + 30,216)
-          screen.blit(gotravel_Text, gotravel_Textrect)
-          travel_cost_font = pg.font.Font(font, 25)
-          travelcost_Text = travel_cost_font.render(travel_cost,True,black,white)
-          travelcost_Textrect = travelcost_Text.get_rect()
-          travelcost_Textrect.center = (Japan_x + 30, Japan_y - 30)
-          screen.blit(travelcost_Text, travelcost_Textrect)
-
-        if Turkey_blit.collidepoint(pos):
-          go_travel = "여행하기"
-          travel_cost = "비용 : 5000원"
-          go_travel_font = pg.font.Font(font, 25)
-          gotravel_Text = go_travel_font.render(go_travel,True,black,white)
-          gotravel_Textrect = gotravel_Text.get_rect()
-          gotravel_Textrect.center = (Japan_x + 30,216)
-          screen.blit(gotravel_Text, gotravel_Textrect)
-          travel_cost_font = pg.font.Font(font, 25)
-          travelcost_Text = travel_cost_font.render(travel_cost,True,black,white)
-          travelcost_Textrect = travelcost_Text.get_rect()
-          travelcost_Textrect.center = (Japan_x + 30, Japan_y - 30)
-          screen.blit(travelcost_Text, travelcost_Textrect)
-
-        if Italy_blit.collidepoint(pos):
-          go_travel = "여행하기"
-          travel_cost = "비용 : 5000원"
-          go_travel_font = pg.font.Font(font, 25)
-          gotravel_Text = go_travel_font.render(go_travel,True,black,white)
-          gotravel_Textrect = gotravel_Text.get_rect()
-          gotravel_Textrect.center = (Japan_x + 30,216)
-          screen.blit(gotravel_Text, gotravel_Textrect)
-          travel_cost_font = pg.font.Font(font, 25)
-          travelcost_Text = travel_cost_font.render(travel_cost,True,black,white)
-          travelcost_Textrect = travelcost_Text.get_rect()
-          travelcost_Textrect.center = (Japan_x + 30, Japan_y - 30)
-          screen.blit(travelcost_Text, travelcost_Textrect)
-
-        if Switzerland_blit.collidepoint(pos):
-          go_travel = "여행하기"
-          travel_cost = "비용 : 5000원"
-          go_travel_font = pg.font.Font(font, 25)
-          gotravel_Text = go_travel_font.render(go_travel,True,black,white)
-          gotravel_Textrect = gotravel_Text.get_rect()
-          gotravel_Textrect.center = (Japan_x + 30,216)
-          screen.blit(gotravel_Text, gotravel_Textrect)
-          travel_cost_font = pg.font.Font(font, 25)
-          travelcost_Text = travel_cost_font.render(travel_cost,True,black,white)
-          travelcost_Textrect = travelcost_Text.get_rect()
-          travelcost_Textrect.center = (Japan_x + 30, Japan_y - 30)
-          screen.blit(travelcost_Text, travelcost_Textrect)
-
-        if South_Pole_blit.collidepoint(pos):
-          go_travel = "여행하기"
-          travel_cost = "비용 : 5000원"
-          go_travel_font = pg.font.Font(font, 25)
-          gotravel_Text = go_travel_font.render(go_travel,True,black,white)
-          gotravel_Textrect = gotravel_Text.get_rect()
-          gotravel_Textrect.center = (Japan_x + 30,216)
-          screen.blit(gotravel_Text, gotravel_Textrect)
-          travel_cost_font = pg.font.Font(font, 25)
-          travelcost_Text = travel_cost_font.render(travel_cost,True,black,white)
-          travelcost_Textrect = travelcost_Text.get_rect()
-          travelcost_Textrect.center = (Japan_x + 30, Japan_y - 30)
-          screen.blit(travelcost_Text, travelcost_Textrect)
-      
 
         """
         #이전으로 버튼
