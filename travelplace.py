@@ -62,56 +62,56 @@ while True:
    # textrect.center =(100,100)
    # screen.blit(text,textrect)
 
-    Map = pg.image.load('./Image/지도.png')
+    Map = pg.image.load('./Image/TravelMap.png')
     Map = (pg.transform.scale(Map,(800,600))).convert_alpha()
     Map_blit = screen.blit(Map,(-75,0))
 
-    Space = pg.image.load('./Image/우주1.png')
+    Space = pg.image.load('./Image/Space1.png')
     Space = (pg.transform.scale(Space,(300,400))).convert_alpha()
     Space_blit = screen.blit(Space,(550,80))
 
-    Moon = pg.image.load('./Image/달.png')
+    Moon = pg.image.load('./Image/Moon.png')
     Moon = (pg.transform.scale(Moon,(130,100))).convert_alpha()
     Moon_blit = screen.blit(Moon,(660,185))
 
-    Andromeda = pg.image.load('./Image/은하.png')
+    Andromeda = pg.image.load('./Image/Galaxy.png')
     Andromeda = (pg.transform.scale(Andromeda,(170,185))).convert_alpha()
     Andromeda_blit = screen.blit(Andromeda,(650,255))
 
 
-    Japan = pg.image.load('./Image/지도 핀.png')
+    Japan = pg.image.load('./Image/Pin.png')
     Japan = (pg.transform.scale((Japan),(100,50))).convert_alpha()
     Japan_blit = screen.blit(Japan,(461,216))
 
-    Taiwan = pg.image.load('./Image/지도 핀.png')
+    Taiwan = pg.image.load('./Image/Pin.png')
     Taiwan = (pg.transform.scale((Taiwan),(100,50))).convert_alpha()
     Taiwan_blit= screen.blit(Taiwan,(438,249))
 
-    Singapore = pg.image.load('./Image/지도 핀.png')
+    Singapore = pg.image.load('./Image/Pin.png')
     Singapore = (pg.transform.scale((Singapore),(100,50))).convert_alpha()
     Singapore_blit = screen.blit(Singapore,(382,325))
 
-    Russia = pg.image.load('./Image/지도 핀.png')
+    Russia = pg.image.load('./Image/Pin.png')
     Russia = (pg.transform.scale((Russia),(100,50))).convert_alpha()
     Russia_blit = screen.blit(Russia,(319,137))
 
-    Austraila = pg.image.load('./Image/지도 핀.png')
+    Austraila = pg.image.load('./Image/Pin.png')
     Austraila = (pg.transform.scale(Austraila,(100,50))).convert_alpha()
     Austraila_blit = screen.blit(Austraila,(501,427))
 
-    Turkey = pg.image.load('./Image/지도 핀.png')
+    Turkey = pg.image.load('./Image/Pin.png')
     Turkey = (pg.transform.scale(Turkey,(100,50))).convert_alpha()
     Turkey_blit = screen.blit(Turkey,(130,192))
 
-    Italy = pg.image.load('./Image/지도 핀.png')
+    Italy = pg.image.load('./Image/Pin.png')
     Italy = (pg.transform.scale(Italy,(100,50))).convert_alpha()
     Italy_blit = screen.blit(Italy,(80,189))
 
-    Switzerland = pg.image.load('./Image/지도 핀.png')
+    Switzerland = pg.image.load('./Image/Pin.png')
     Switzerland = (pg.transform.scale(Italy,(100,50))).convert_alpha()
     Switzerland_blit = screen.blit(Switzerland,(45,162))
 
-    South_Pole = pg.image.load('./Image/지도 핀.png')
+    South_Pole = pg.image.load('./Image/Pin.png')
     South_Pole = (pg.transform.scale(South_Pole,(100,50))).convert_alpha()
     South_Pole_blit = screen.blit(South_Pole,(256,552))
 
