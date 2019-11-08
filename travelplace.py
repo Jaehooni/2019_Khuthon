@@ -124,9 +124,51 @@ while True:
        ##     pos = pg.mouse.get_pos()
        ##     if b.collidepoint(pos):
        ##         money += money_Add
+      if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
+        pos = pg.mouse.get_pos()
+        if Japan_blit.collidepoint(pos):
+          currentscene = 10 #해당하는 여행지를 눌럿을때 scene 전환
 
+          #이전으로 버튼
+          Goback = pg.image.load('./Image/Before.jpg')
+          Goback = (pg.transform.scale(Goback,(200,100))).convert_alpha()
+          back = screen.blit(Goback,(15,480))
 
-        if event.type == pg.QUIT:
+          #다음으로 버튼
+          Gonext = pg.image.load('./Image/Next.jpg')
+          Gonext = (pg.transform.scale(Gonext,(200,100))).convert_alpha()
+          next = screen.blit(Gonext,(600,480))
+
+          #여행하기 버튼  
+          Travel = pg.image.load('./Image/Travel.png')
+          Travel =  (pg.transform.scale(Travel,(200,100))).convert_alpha()
+          Travelbutton = screen.blit(Travel, (293,480))
+
+          #여행완료 버튼
+          Travel_complete = pg.image.load('./Image/travel_complete.png')
+          Travel_complete =  (pg.transform.scale(Travel,(200,100))).convert_alpha()
+          Travel_complete_button = screen.blit(Travel, (293,480))
+#Travel_complete = Image('./Image/travel_complete.png',(200,100),(293,480))
+          #여행하기 버튼을 눌럿을때 프로세싱 바
+          lt = (100,480)
+          wh = (600,25)
+
+          percent = 0
+          while percent<100:
+            screen.fill((0,0,0))
+            percent = percent%100+0.5
+            r = pg.Rect((100,530), (wh[0]/100*percent, 25))
+            pg.draw.rect(screen,(255,255,255),r)
+
+    
+            pg.display.update()
+            pg.time.delay(20)
+            if percent == 100:
+              break
+          
+           
+
+      if event.type == pg.QUIT:
             pg.quit()
             quit()
 
