@@ -14,9 +14,11 @@ pg.display.set_caption("가제 : 방구석 여ㅡ행")
 
 #필요한 변수들 선언
 cup_image = pg.image.load("./Image/yabawi.png")
+ui_image = pg.image.load("./Image/a_ui.png")
 
 bmjuaFont = pg.font.Font("./Font/bmjua.ttf", 30)
 posX = 315
+posY = 180
 distance = 250
 
 reward = random.randint(2,11)
@@ -24,11 +26,15 @@ reward_text = bmjuaFont.render(str(reward)+"배", True, black)
 
 reward_pos = random.randint(-1,1)
 
+#UI 유지용
+def make_ui():
+    screen.blit(ui_image, (0,444))
+
 
 #보여주는 모션
 def open_cup(pos):
     reward_rect = reward_text.get_rect()
-    reward_rect.center = (posX+reward_pos*distance+85, 370)
+    reward_rect.center = (posX+reward_pos*distance+85, posY+170)
     i = -5
     while i < 300:
         i+=1
@@ -36,13 +42,16 @@ def open_cup(pos):
             continue;
         
         screen.fill(white)
+
+        make_ui()
+        
         screen.blit(reward_text, reward_rect)
         
         dh = 150 - abs(150-i)
 
-        screen.blit(cup_image, (posX-distance, 200-(pos==-1)*dh))
-        screen.blit(cup_image, (posX, 200-(pos==0)*dh))
-        screen.blit(cup_image, (posX+distance, 200-(pos==1)*dh))
+        screen.blit(cup_image, (posX-distance, posY-(pos==-1)*dh))
+        screen.blit(cup_image, (posX, posY-(pos==0)*dh))
+        screen.blit(cup_image, (posX+distance, posY-(pos==1)*dh))
 
         pg.display.update()
         pg.time.wait(1)
@@ -58,8 +67,10 @@ for i in range(3):
     while distance > -255:
         screen.fill(white)
 
+        make_ui()
+
         dw = 50-abs(distance)/5
-        dh = int(200-dw/2)
+        dh = int(posY-dw/2)
         
         con_cup_image = pg.transform.scale(cup_image,(int(171+0.85*dw), int(207+dw))).convert_alpha()
 
@@ -73,9 +84,9 @@ for i in range(3):
         pg.time.wait(1)
 
 distance = 250
-cup[0] = screen.blit(cup_image, (posX-distance, 200))
-cup[1] = screen.blit(cup_image, (posX, 200))
-cup[2] = screen.blit(cup_image, (posX+distance, 200))
+cup[0] = screen.blit(cup_image, (posX-distance, posY))
+cup[1] = screen.blit(cup_image, (posX, posY))
+cup[2] = screen.blit(cup_image, (posX+distance, posY))
 
 #이벤트 코드
 pg.event.clear()
@@ -102,11 +113,16 @@ if clicked_pos != reward_pos:
 
 else:
     re_motion = [pg.image.load("./Image/reward1.png"), pg.image.load("./Image/reward2.png")]
-    re_motion_pos = [(130,20),(125,60)]
+    for i in range(2):
+        re_motion[i] = pg.transform.scale(re_motion[i], (400,400))
+    re_motion_pos = [(210,15),(210,30)]
 
     for i in range(6):
         screen.fill(white)
+
+        make_ui()
+        
         screen.blit(re_motion[i%2], re_motion_pos[i%2])
-        screen.blit(reward_text, (379,285))
+        screen.blit(reward_text, (379,207))
         pg.display.update()
         pg.time.wait(500)
