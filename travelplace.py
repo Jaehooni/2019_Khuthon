@@ -206,7 +206,7 @@ while True:
             ##비용확인 후 시도하기
             national_clear[national_count] = 1
             processing_bar(national_count+20)
-            player.maxmoney = national_max_money[national_count]
+            #player.maxmoney = national_max_money[national_count]
 
         for i in range(11):
             if national_button[i].collidepoint(pos):
