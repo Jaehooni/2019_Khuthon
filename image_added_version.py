@@ -74,8 +74,144 @@ charm1 = Image('./Image/charm1.png',-1,(95,50))
 charm2 = Image('./Image/charm2.png',-1,(95,175)) 
 charm3 = Image('./Image/charm3.png',-1,(95,300))
 
+#나라(1) = 그냥 여행지 사진, 나라(2) = 여행 진행중 사진 추후 첨부
+#나라(3) -> 1번과 동일하나 여행하기 버튼이 여행완료로 바뀐 형태
+
+#---20---이시국 여행지 사진 첨부
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+#---21---대만
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+#---22---싱가폴
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+#---23---러시아
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+#---24---호주
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+#---25---터키
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+#---26---이탈리아
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+#---27---스위스
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+#---28---남극
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+#---29---달
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+#------안드로메다
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+
+
+#---30---이시국(2)
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+#---31---대만(2)
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+#---32---싱가폴(2)
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+#---33---러시아(2)
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+#---34---호주(2)
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+#---35---터키(2)
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+#---36---이탈리아(2)
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+#---37---스위스(2)
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+#---38---남극(2)
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+#---39---달(2)
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+#------안드로메다(2)
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel = Image('./Image/Travel.png',(200,100),(293,480))
+
+
+#---40---이시국(3)
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel_complete = Image('./Image/travel_complete.png',(200,100),(293,480))
+#---41---대만(3)
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel_complete = Image('./Image/travel_complete.png',(200,100),(293,480))
+#---42---싱가폴(3)
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel_complete = Image('./Image/travel_complete.png',(200,100),(293,480))
+#---43---러시아(3)
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel_complete = Image('./Image/travel_complete.png',(200,100),(293,480))
+#---44---호주(3)
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel_complete = Image('./Image/travel_complete.png',(200,100),(293,480))
+#---45---터키(3)
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel_complete = Image('./Image/travel_complete.png',(200,100),(293,480))
+#---46---이탈리아(3)
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel_complete = Image('./Image/travel_complete.png',(200,100),(293,480))
+#---47---스위스(3)
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel_complete = Image('./Image/travel_complete.png',(200,100),(293,480))
+#---48---남극(3)
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel_complete = Image('./Image/travel_complete.png',(200,100),(293,480))
+#---49---달(3)
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel_complete = Image('./Image/travel_complete.png',(200,100),(293,480))
+#------안드로메다(3)
+Goback = Image('./Image/Before.jpg',(200,100),(15,480))
+Gonext = Image('./Image/Next.jpg',(200,100),(600,480))
+Travel_complete = Image('./Image/travel_complete.png',(200,100),(293,480))
 scenelist = [] 
-for i in range(0,50):
+for i in range(0,55):
     scenelist.append([])
 scenelist[0].extend([main_background,go_alba,go_stat,go_travel])
 scenelist[1].extend([alba1_1,alba1_2,alba1_3,backmove,frontmove])
@@ -85,6 +221,40 @@ scenelist[4].extend([int1,int2,int3,backmove,frontmove])
 scenelist[5].extend([heal1,heal2,heal3,backmove,frontmove])
 scenelist[6].extend([charm1,charm2,charm3,backmove])
 scenelist[10].extend([intro_background]) #인트로
+scenelist[20].extend([Gonext, Travel])
+scenelist[21].extend([Gonext, Goback, Travel])
+scenelist[22].extend([Gonext, Goback, Travel])
+scenelist[23].extend([Gonext, Goback, Travel])
+scenelist[24].extend([Gonext, Goback, Travel])
+scenelist[25].extend([Gonext, Goback, Travel])
+scenelist[26].extend([Gonext, Goback, Travel])
+scenelist[27].extend([Gonext, Goback, Travel])
+scenelist[28].extend([Gonext, Goback, Travel])
+scenelist[29].extend([Gonext, Goback, Travel])
+scenelist[30].extend([Gonext, Travel])
+scenelist[31].extend([Gonext, Goback, Travel])
+scenelist[32].extend([Gonext, Goback, Travel])
+scenelist[33].extend([Gonext, Goback, Travel])
+scenelist[34].extend([Gonext, Goback, Travel])
+scenelist[35].extend([Gonext, Goback, Travel])
+scenelist[36].extend([Gonext, Goback, Travel])
+scenelist[37].extend([Gonext, Goback, Travel])
+scenelist[38].extend([Gonext, Goback, Travel])
+scenelist[39].extend([Gonext, Goback, Travel])
+scenelist[40].extend([Gonext, Travel])
+scenelist[41].extend([Gonext, Goback, Travel])
+scenelist[42].extend([Gonext, Goback, Travel])
+scenelist[43].extend([Gonext, Goback, Travel])
+scenelist[44].extend([Gonext, Goback, Travel])
+scenelist[45].extend([Gonext, Goback, Travel])
+scenelist[46].extend([Gonext, Goback, Travel])
+scenelist[47].extend([Gonext, Goback, Travel])
+scenelist[48].extend([Gonext, Goback, Travel])
+scenelist[49].extend([Gonext, Goback, Travel])
+scenelist[50].extend([Gonext, Travel])
+scenelist[51].extend([Gonext, Goback, Travel])
+scenelist[52].extend([Gonext, Goback, Travel])
+scenelist[53].extend([Gonext, Goback, Travel])
 
 def fade_in_and_out():
     fade = 255
@@ -158,6 +328,7 @@ def day_pass():
 def money_clear():
     if player.money >= player.maxmoney:
         player.money = player.maxmoney       
+   
 
 def money_decline(player,decline): #돈없으면 업글못해
     if player.money < decline:
@@ -166,6 +337,21 @@ def money_decline(player,decline): #돈없으면 업글못해
         player.money -= decline
         player.stamina -= 10
         return True
+
+def processing_bar():#processing_bar
+    lt = (100,480)
+    wh = (600,25)
+    percent = 0
+    while percent<100:
+        screen.fill((0,0,0))
+        percent = percent%100+0.5
+        r = pg.Rect((100,530), (wh[0]/100*percent, 25))
+        pg.draw.rect(screen,(255,255,255),r)
+
+    
+        pg.display.update()
+        pg.time.delay(1)
+    pg.event.clear()
 
 while True:
     screen.fill(white)
@@ -191,6 +377,7 @@ while True:
                 if alba1_1.Rect.collidepoint(pos):
                     player.money += 5000 
                     player.stamina -= 10
+                    processing_bar()
                 elif alba1_2.Rect.collidepoint(pos):
                     player.money += 100000 * alba_lock(player.intelligence,10)
                     player.stamina -= 10 * alba_lock(player.intelligence,10)
@@ -261,9 +448,9 @@ while True:
         if event.type == pg.QUIT:
             pg.quit()
             quit()
-
-    money_clear() #최대보유량 넘으면 자름
-    day_pass() #
+    
+    money_clear()
+    day_pass()
 
     #test용
     realtime_Font = pg.font.Font(None, 25)
