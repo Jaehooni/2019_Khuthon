@@ -21,7 +21,7 @@ class Player():
         self.health = 1
         self.intelligence = 1
         self.charm = 1
-        self.money = 10
+        self.money = 0
         self.maxmoney = 200000
         self.happiness = 0
         self.stamina = 100
@@ -95,6 +95,7 @@ scenelist[4].extend([int1,int2,int3,backmove,frontmove])
 scenelist[5].extend([heal1,heal2,heal3,backmove,frontmove])
 scenelist[6].extend([charm1,charm2,charm3,backmove])
 scenelist[8].extend([game_start,backmove,bat10000,bat1000000,bat_clear])
+
 scenelist[10].extend([intro_background]) #인트로
 
 def fade_in_and_out():
@@ -113,40 +114,41 @@ def scene_change_blit(currentscene):
         screen.blit(sprite.image,sprite.Rect)
 
 def ui_blit(): #ui출력용,currentscene받아서 특정씬에는 안돌리게 하면됨
-    screen.blit(ui.image,ui.Rect)
-    screen.blit(stamina_gauge.image,stamina_gauge.Rect)
+    if currentscene != 10:
+        screen.blit(ui.image,ui.Rect)
+        screen.blit(stamina_gauge.image,stamina_gauge.Rect)
 
-    realtime_Font = pg.font.Font(None, 25)
-    text = realtime_Font.render(str(int(player.money)),True,(0,0,0))
-    textrect = text.get_rect()
-    textrect.topleft =(343,506)
-    screen.blit(text,textrect)
+        realtime_Font = pg.font.Font(None, 25)
+        text = realtime_Font.render(str(int(player.money)),True,(0,0,0))
+        textrect = text.get_rect()
+        textrect.topleft =(343,506)
+        screen.blit(text,textrect)
 
-    realtime_Font = pg.font.Font(None, 25)
-    text = realtime_Font.render(str(player.day),True,(0,0,0))
-    textrect = text.get_rect()
-    textrect.topleft =(343,545)
-    screen.blit(text,textrect)
+        realtime_Font = pg.font.Font(None, 25)
+        text = realtime_Font.render(str(player.day),True,(0,0,0))
+        textrect = text.get_rect()
+        textrect.topleft =(343,545)
+        screen.blit(text,textrect)
 
-    text = realtime_Font.render(str(player.health),True,(0,0,0))
-    textrect = text.get_rect()
-    textrect.topleft =(127,470)
-    screen.blit(text,textrect)
+        text = realtime_Font.render(str(player.health),True,(0,0,0))
+        textrect = text.get_rect()
+        textrect.topleft =(127,470)
+        screen.blit(text,textrect)
 
-    text = realtime_Font.render(str(player.intelligence),True,(0,0,0))
-    textrect = text.get_rect()
-    textrect.topleft =(127,518)
-    screen.blit(text,textrect)
+        text = realtime_Font.render(str(player.intelligence),True,(0,0,0))
+        textrect = text.get_rect()
+        textrect.topleft =(127,518)
+        screen.blit(text,textrect)
 
-    text = realtime_Font.render(str(player.charm),True,(0,0,0))
-    textrect = text.get_rect()
-    textrect.topleft =(127,561)
-    screen.blit(text,textrect)
+        text = realtime_Font.render(str(player.charm),True,(0,0,0))
+        textrect = text.get_rect()
+        textrect.topleft =(127,561)
+        screen.blit(text,textrect)
 
-    text = realtime_Font.render(str(player.maxmoney),True,(0,0,0))
-    textrect = text.get_rect()
-    textrect.topleft =(626,479)
-    screen.blit(text,textrect)
+        text = realtime_Font.render(str(player.maxmoney),True,(0,0,0))
+        textrect = text.get_rect()
+        textrect.topleft =(626,479)
+        screen.blit(text,textrect)
 
 def alba_lock(stat,min_stat):
     if stat >= min_stat:
@@ -412,71 +414,71 @@ while True:
                 if alba1_1.Rect.collidepoint(pos):
                     player.money += 5000 + 5000*0.25*effect_list[5]
                     player.stamina -= 10
-                elif alba1_2.Rect.collidepoint(pos) and alba_lock(player.intelligence,10):
-                    player.money += 100000 
+                elif alba1_2.Rect.collidepoint(pos) and alba_lock(player.intelligence,20):
+                    player.money += 100000 * (1+0.25*effect_list[5])
                     player.stamina -= 10 
-                elif alba1_3.Rect.collidepoint(pos) :
-                    player.money += 2000000 * alba_lock(player.intelligence,50)
-                    player.stamina -= 10 * alba_lock(player.intelligence,50)
+                elif alba1_3.Rect.collidepoint(pos) and alba_lock(player.intelligence,100):
+                    player.money += 2000000 * (1+0.25*effect_list[5])
+                    player.stamina -= 10  
                 elif backmove.Rect.collidepoint(pos):
                     currentscene = 0
                 elif frontmove.Rect.collidepoint(pos):
                     currentscene = 2
             elif currentscene == 2:
                 if alba2_1.Rect.collidepoint(pos):
-                    player.money += 10000
+                    player.money += 5000
                     player.stamina -= 10
-                elif alba2_2.Rect.collidepoint(pos):
-                    player.money += 200000 * alba_lock(player.health,10)
-                    player.stamina -= 10 * alba_lock(player.health,10)
-                elif alba2_3.Rect.collidepoint(pos):
-                    player.money += 10000000 * alba_lock(player.health,100)
-                    player.stamina -= 10 * alba_lock(player.health,100)
+                elif alba2_2.Rect.collidepoint(pos) and alba_lock(player.health,20):
+                    player.money += 200000 *(1+0.25*effect_list[5])
+                    player.stamina -= 10 * (1+0.25*effect_list[5])
+                elif alba2_3.Rect.collidepoint(pos) and alba_lock(player.health,100):
+                    player.money += 2000000 * (1+0.25*effect_list[5])
+                    player.stamina -= 10 * (1+0.25*effect_list[5])
                 elif backmove.Rect.collidepoint(pos):
                     currentscene = 1
                 elif frontmove.Rect.collidepoint(pos):
                     currentscene = 3
             elif currentscene == 3:
-                if alba3_1.Rect.collidepoint(pos):
-                    player.money += 5000
-                    player.stamina -= 10
-                elif alba3_2.Rect.collidepoint(pos):
-                    player.money += 100000 * alba_lock(player.charm,10)
-                    player.stamina -= 10 * alba_lock(player.charm,10)
-                elif alba3_3.Rect.collidepoint(pos):
-                    player.money += 2000000 * alba_lock(player.charm,50)
-                    player.stamina -= 10 * alba_lock(player.charm,50)
+                if alba3_1.Rect.collidepoint(pos) and alba_lock(player.charm,5):
+                    player.money += 5000 * (1+0.25*effect_list[5])
+                    player.stamina -= 10 * (1+0.25*effect_list[5])
+                elif alba3_2.Rect.collidepoint(pos) and alba_lock(player.charm,50):
+                    player.money += 500000 * (1+0.25*effect_list[5])
+                    player.stamina -= 10 * (1+0.25*effect_list[5])
+                elif alba3_3.Rect.collidepoint(pos) and alba_lock(player.charm,200):
+                    player.money += 5000000 * (1+0.25*effect_list[5])
+                    player.stamina -= 10 * (1+0.25*effect_list[5])
                 elif backmove.Rect.collidepoint(pos):
                     currentscene = 2
             elif currentscene == 4:
                 if int1.Rect.collidepoint(pos):
-                    player.intelligence += 1 * money_decline(player,30000)
+                    player.intelligence += 1 * money_decline(player,5000)
                 elif int2.Rect.collidepoint(pos):
-                    player.intelligence += 5 * money_decline(player,1000000)
+                    player.intelligence += 5 * money_decline(player,100000)
                 elif int3.Rect.collidepoint(pos):
-                    player.intelligence += 50 * money_decline(player,10000000)
+                    player.intelligence += 50 * money_decline(player,2000000)
                 elif backmove.Rect.collidepoint(pos):
                     currentscene = 0   
                 elif frontmove.Rect.collidepoint(pos):
                     currentscene = 5 
             elif currentscene == 5:
                 if heal1.Rect.collidepoint(pos):
-                    player.health += 1 * money_decline(player,50000)
+                    player.health += 1 * money_decline(player,5000)
                 elif heal2.Rect.collidepoint(pos):
-                    player.health += 5 * money_decline(player,2500000)
+                    player.health += 5 * money_decline(player,100000)
                 elif heal3.Rect.collidepoint(pos):
-                    player.health += 10 * money_decline(player,50000000)
+                    player.health += 10 * money_decline(player,2000000)
                 elif backmove.Rect.collidepoint(pos):
                     currentscene = 4   
                 elif frontmove.Rect.collidepoint(pos):
                     currentscene = 6 
             elif currentscene == 6:
                 if int1.Rect.collidepoint(pos):
-                    player.charm += 1 * money_decline(player,30000)
+                    player.charm += 1 * money_decline(player,10000)
                 elif int2.Rect.collidepoint(pos):
-                    player.charm += 5 * money_decline(player,1000000)
+                    player.charm += 5 * money_decline(player,300000)
                 elif int3.Rect.collidepoint(pos):
-                    player.charm += 50 * money_decline(player,10000000)
+                    player.charm += 50 * money_decline(player,5000000)
                 elif backmove.Rect.collidepoint(pos):
                     currentscene = 5   
             elif currentscene == 8:
