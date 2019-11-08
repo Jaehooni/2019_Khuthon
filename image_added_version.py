@@ -137,7 +137,7 @@ def travel(currentscene):
 
     for i in range(2):
         lst.append(Image('./Image/Travel_Images/{}{}.png'.format(national_name, i+1),(200,100),(15,480)))
-    scenelist[currentscene]
+    scenelist[currentscene] = lst
 
 """
 #---30---이시국(2) 프로세싱 바와 함께 사진 움직이는것 연출
