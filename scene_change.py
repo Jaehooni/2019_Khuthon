@@ -46,9 +46,9 @@ class Image(pg.sprite.Sprite): #rect는 sprite객체만 가능해서 만듦
         self.rect = self.image.get_rect()
         self.rect = rect
 
-image0 = Image('./Image/button.jpg',(200,100),(0,0)) #image0이라는 sprite객체가 만들어짐
-image1 = Image('./Image/button.jpg',(200,200),(0,0)) #image0을 screenblit하면 안됨(image0은 이미지가아님)
-image2 = Image('./Image/button.jpg',(200,300),(0,0)) #image0.image가 출력가능한것
+image0 = Image('./Image/travel_button.jpg',(200,100),(0,0)) #image0이라는 sprite객체가 만들어짐
+image1 = Image('./Image/travel_button.jpg',(200,200),(0,0)) #image0을 screenblit하면 안됨(image0은 이미지가아님)
+image2 = Image('./Image/travel_button.jpg',(200,300),(0,0)) #image0.image가 출력가능한것
 
 scenelist = [[],[],[]] #내부의리스트는 하나의 게임씬(0번 씬,1번 씬...)
 scenelist[0].append(image0) #먼저 image0을 0번씬에 추가함
