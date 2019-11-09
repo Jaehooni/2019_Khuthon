@@ -41,6 +41,13 @@ class Image(pg.sprite.Sprite): #rect는 sprite객체만 가능해서 만듦
         self.Rect = self.image.get_rect(topleft=rect)
 
 intro_background = Image('./Image/Intro_background.png',(850,650),(-30,-15))
+
+ #---10--
+game_start = "게임 시작"
+gamestart_Font = pg.font.Font(font,40)
+gamestart_Text = gamestart_Font.render(game_start,True,(52,146,235)).convert_alpha()
+gamestart_Textrect = gamestart_Text.get_rect()
+gamestart_Textrect.center = (400,500)
 #---0---
 main_background = Image('./Image/main_background.png',-1,(0,0))
 go_alba = Image('./Image/go_alba.png',-1,(18,38))
@@ -212,11 +219,14 @@ def fade_in_and_out():
         pg.display.update()
         pg.time.wait(1) 
 
-def scene_change_blit(currentscene): 
+def scene_change_blit(currentscene):
+    global gamestart_button 
     for sprite in scenelist[currentscene]:
         screen.blit(sprite.image,sprite.Rect)
-
-    if currentscene == 19:
+    if currentscene == 10:
+        gamestart_button = screen.blit(gamestart_Text,gamestart_Textrect)
+        
+    elif currentscene == 19:
         Map_blit = screen.blit(Map,(-75,0))
         Space_blit = screen.blit(Space,space_pos)
         national_button[9] = screen.blit(outer_image[0],national_pos[9])
@@ -506,8 +516,10 @@ while True:
         if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
             pos = pg.mouse.get_pos()
             if currentscene == 10:
-                if intro_background.Rect.collidepoint(pos):
+                if gamestart_button.collidepoint(pos):
                     currentscene = 0
+
+
             elif currentscene == 0:
                 if go_alba.Rect.collidepoint(pos):
                     currentscene = 1
