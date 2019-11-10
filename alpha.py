@@ -50,10 +50,10 @@ gamestart_Textrect = gamestart_Text.get_rect()
 gamestart_Textrect.center = (400,500)
 #---0---
 main_background = Image('./Image/main_background.png',-1,(0,0))
-go_alba = Image('./Image/go_alba.png',-1,(18,38))
-go_stat = Image('./Image/go_stat.png',-1,(18,150))
-go_travel = Image('./Image/go_travel.png',-1,(18,262))
-go_game = Image('./Image/go_game.png',-1,(18,364))
+go_alba = Image('./Image/go_alba.png',-1,(18,30))
+go_stat = Image('./Image/go_stat.png',-1,(18,135))
+go_travel = Image('./Image/go_travel.png',-1,(18,240))
+go_game = Image('./Image/go_game.png',-1,(18,345))
 
 #---1---
 ui = Image('./Image/a_ui3.png',-1,(0,444)) 
@@ -89,6 +89,8 @@ game_start = Image('./Image/game_start.png',-1,(295,50))
 bat10000 = Image('./Image/10000bat.png',-1,(303,160))
 bat1000000 = Image('./Image/1000000bat.png',-1,(310,250))
 bat_clear = Image('./Image/bat_clear.png',-1,(310,330))
+#---19---
+go_main = Image("./Image/go_main.png",-1,(280,400))
 
 effect_list = [0 for i in range(13)]
 
@@ -104,9 +106,9 @@ scenelist[5].extend([heal1,heal2,heal3,backmove,frontmove])
 scenelist[6].extend([charm1,charm2,charm3,backmove])
 scenelist[8].extend([game_start,backmove,bat10000,bat1000000,bat_clear])
 
-scenelist[10].extend([intro_background]) #인로
+scenelist[10].extend([intro_background]) #인트로
 
-scenelist[19].extend([backmove])
+scenelist[19].extend([go_main])
 
 
 pin_image = pg.transform.scale(pg.image.load('./Image/Pin.png'),(25,25)).convert_alpha()
@@ -166,6 +168,8 @@ def make_travel_button(pos, cost, name, clear):
 
     return button
 
+
+travel_pos = [(90,100),(0,100)]
 def travel(currentscene):
     lst = []
     national_name = national_list[currentscene-20]
@@ -175,7 +179,7 @@ def travel(currentscene):
         lst.append(Image('./Image/Travel_Images/travel2.png',(600,300),(415,100)))
 
     for i in range(2):
-        lst.append(Image('./Image/Travel_Images/{}{}.png'.format(national_name, i+1),(600,300),(0,100)))
+        lst.append(Image('./Image/Travel_Images/{}{}.png'.format(national_name, i+1),(600,300),travel_pos[currentscene != 20]))
     return lst
 
 
@@ -488,6 +492,7 @@ def game():
             pg.display.update()
             pg.time.wait(500)
         player.money += reward * player.bat
+        
 betting_scene = False
 map_scene = False
 national_count = -1
@@ -618,7 +623,7 @@ while True:
 
             elif currentscene == 19:
                 map_scene = True
-                if backmove.Rect.collidepoint(pos):
+                if go_main.Rect.collidepoint(pos):
                     currentscene = 0
                     map_scene = False
                     
