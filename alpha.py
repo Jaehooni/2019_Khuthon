@@ -92,8 +92,12 @@ bat_clear = Image('./Image/bat_clear.png',-1,(310,330))
 #---19---
 go_main = Image("./Image/go_main.png",-1,(280,400))
 
+
+
 effect_list = [0 for i in range(13)]
 
+
+#---- 씬 버튼 추가 ----
 scenelist = [] 
 for i in range(0,50):
     scenelist.append([])
@@ -109,6 +113,8 @@ scenelist[8].extend([game_start,backmove,bat10000,bat1000000,bat_clear])
 scenelist[10].extend([intro_background]) #인트로
 
 scenelist[19].extend([go_main])
+
+#--------------------
 
 
 pin_image = pg.transform.scale(pg.image.load('./Image/Pin.png'),(25,25)).convert_alpha()
@@ -151,7 +157,6 @@ def make_travel_button(pos, cost, name, clear):
     gotravel_Text = go_travel_font.render(go_travel,True,black,white)
     gotravel_Textrect = gotravel_Text.get_rect()
     gotravel_Textrect.center = (x + 30, y)
-    
     
     travel_cost_font = pg.font.Font(font, 25)
     travelcost_Text = travel_cost_font.render(travel_cost,True,black,white)
@@ -413,7 +418,7 @@ def day_event_message(message):
 #게임변수
 def game():
     cup_image = pg.image.load("./Image/yabawi.png")
-    bmjuaFont = pg.font.Font("./Font/bmjua.ttf", 30)
+    bmjuaFont = pg.font.Font(font, 30)
     posX = 315
     posY = 180
     distance = 250
